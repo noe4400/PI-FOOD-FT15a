@@ -6,13 +6,15 @@ module.exports = sequelize => {
 	sequelize.define('recipe', {
 		id: {
 			type: DataTypes.INTEGER,
+			get() {
+				return `lh-${this.getDataValue('id')}`;
+			},
 			autoIncrement: true,
 			primaryKey: true,
 		},
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
-			primaryKey: true,
 		},
 		summary: {
 			type: DataTypes.STRING,
