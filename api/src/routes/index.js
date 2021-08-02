@@ -41,21 +41,35 @@ router.get('/recipes', async (req, res) => {
 		`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&addRecipeInformation=true&apiKey=${API_KEY}`
 	);
 	let responseApi = apiRequest.data.results;
+	let filterResponse;
+	if (responseApi.length > 0) {
+		filterResponse = responseApi.map(recipe => ({
+			id: recipe.id,
+			name: recipe.title,
+			image: recipe.image,
+			summary: recipe.summary,
+			dishTypes: recipe.dishTypes,
+			healthscore: recipe.healthScore,
+			score: recipe.spoonacularScore,
+			diets: recipe.diets,
+			steps: recipe.analyzedInstructions.map(steps => steps.steps),
+		}));
+	}
+
 	const getRecipe = await Recipe.findAll({
 		where: { name: { [Op.iLike]: `%${name}%` } },
 	});
-	console.log(responseApi);
+
 	if (getRecipe.length > 0 && responseApi.length > 0) {
-		responseApi = [...responseApi, ...getRecipe];
+		filterResponse = [...filterResponse, ...getRecipe];
 	}
 	if (responseApi.length === 0 && getRecipe.length > 0) {
-		responseApi = [...getRecipe];
-		console.log('hit here');
+		filterResponse = [...getRecipe];
 	}
 
-	if (responseApi.length === 0) return res.status(404).send('Not found');
+	if (!filterResponse) return res.status(404).send('Not items were found');
 
-	res.status(202).send(responseApi);
+	res.status(200).send(filterResponse);
 });
 
 router.get('/types', async (req, res) => {
@@ -75,6 +89,7 @@ router.get('/types', async (req, res) => {
 		'Primal',
 		'Whole30',
 	];
+
 	const promises = dietTypesArray.map(async diet => {
 		const createDataType = await DietType.create({
 			name: diet,
