@@ -1,75 +1,99 @@
 .container {
 	height: 100vh;
 
-	background: #faf1e6;
+	/* background: rgb(251, 147, 0);
+	background: radial-gradient(
+		circle at bottom right,
+		rgba(251, 147, 0, 0.6) 28%,
+		rgba(245, 230, 202, 0.8) 76%
+	); */
 }
 .wrapper {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	position: relative;
 }
-.left-side,
-.right-side {
-	width: 50%;
-	margin: 40px;
-	padding: 15px;
-}
+
 .left-side {
+	margin-left: 60px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+	position: relative;
 }
+
+.left-side::after {
+	content: '';
+	width: 15px;
+	height: 45%;
+	background-color: #fbab7e;
+	background-image: linear-gradient(0deg, #fbab7e 0%, #f7ce68 100%);
+	position: absolute;
+	left: 0px;
+	top: 130px;
+}
+
 h1 {
 	font-size: 150px;
-	color: rgba(52, 63, 86, 0.99);
+	color: #343f56;
 	font-weight: 900;
-	margin-top: 150px;
+	margin: 100px 0 0 50px;
 }
 h3 {
 	font-size: 30px;
-	color: rgb(52, 63, 86);
+	color: rgba(52, 63, 86, 0.75);
 }
-.right-side {
-	align-items: flex-start;
+
+span {
+	color: #f54748;
 }
+
 .right-side img {
-	width: 100%;
+	position: relative;
+	margin-top: 100px;
+	margin-right: 100px;
+	align-content: center;
+	width: 800px;
 }
+
+.rectangle-img {
+	position: absolute;
+	background-color: #fbab7e;
+	background-image: linear-gradient(0deg, #fbab7e 0%, #f7ce68 100%);
+	right: 0;
+	top: 150px;
+	border-radius: 20px 0 0 20px;
+	height: 80%;
+	width: 30%;
+	z-index: -1;
+}
+
 .log-in-button {
 	margin: 25px;
-	width: 150px;
+	width: 200px;
 	padding: 10px;
 	font-size: 30px;
 	right: 0;
 	color: #ffff;
-	background: #343f56;
-	transition: 0.5s;
-
-	border-radius: 10px;
+	background-color: #fbab7e;
+	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 100%);
+	transition: width 0.3s;
 	border: none;
 	margin-left: 80%;
+	border-radius: 30px;
+}
+.log-in-button img {
+	width: 40px;
+	display: none;
+}
+.log-in-button:hover img {
+	display: block;
 }
 .log-in-button:hover {
 	background: #f54748;
-}
-
-.custom-shape-divider-bottom-1627779220 {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	overflow: hidden;
-	line-height: 0;
-	transform: rotate(180deg);
-}
-
-.custom-shape-divider-bottom-1627779220 svg {
-	position: relative;
-	display: block;
-	width: calc(152% + 1.3px);
-	height: 217px;
-}
-
-.custom-shape-divider-bottom-1627779220 .shape-fill {
-	fill: #ffffff;
+	width: 230px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
