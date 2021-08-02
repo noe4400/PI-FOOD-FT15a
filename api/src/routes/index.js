@@ -11,11 +11,27 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get('/recipes/:id', async (req, res) => {
-	const { id } = req.params;
+	let { id } = req.params;
+
 	if (!id) return res.status(404).send('invalid id');
-	const getRecipeById = await Recipe.findByPk(id);
-	if (!getRecipe) return res.status(404).send('Not found');
-	res.json.send(getRecipeById);
+	try {
+		if (id.includes('-')) {
+			id = id.split('-');
+			const getlocalRecipeById = await Recipe.findByPk(parseInt(id[1]));
+			if (!getlocalRecipe) return res.status(404).send('Not found');
+			return res.send(getlocalRecipe);
+		}
+
+		const getReceipeById = await axios.get(
+			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+		);
+
+		// if (!getReceipeById) return res.status(404).send('Not found');
+
+		res.send(getReceipeById.data);
+	} catch (err) {
+		res.status(404).send('Not found');
+	}
 });
 
 router.get('/recipes', async (req, res) => {
@@ -28,13 +44,16 @@ router.get('/recipes', async (req, res) => {
 	const getRecipe = await Recipe.findAll({
 		where: { name: { [Op.iLike]: `%${name}%` } },
 	});
-	if (getRecipe.length > 0) {
+	console.log(responseApi);
+	if (getRecipe.length > 0 && responseApi.length > 0) {
 		responseApi = [...responseApi, ...getRecipe];
-	} else {
-		responseApi = getRecipe;
+	}
+	if (responseApi.length === 0 && getRecipe.length > 0) {
+		responseApi = [...getRecipe];
+		console.log('hit here');
 	}
 
-	if (!responseApi) return res.status(404).send('Not found');
+	if (responseApi.length === 0) return res.status(404).send('Not found');
 
 	res.status(202).send(responseApi);
 });
