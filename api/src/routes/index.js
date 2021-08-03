@@ -40,8 +40,10 @@ router.get('/recipes/:id', async (req, res) => {
 	if (!id) return res.status(404).send('invalid id');
 
 	if (id.includes('-')) {
-		const getlocalRecipeById = await Recipe.findByPk(id);
-		console.log('includes -', getlocalRecipeById);
+		const getlocalRecipeById = await Recipe.findOne({
+			where: { id: id },
+			include: DietType,
+		});
 		if (!getlocalRecipeById) return res.status(404).send('Not found');
 		return res.send(getlocalRecipeById);
 	}
