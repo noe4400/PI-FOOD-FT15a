@@ -7,11 +7,8 @@ module.exports = sequelize => {
 		'recipe',
 		{
 			id: {
-				type: DataTypes.INTEGER,
-				get() {
-					return `lh-${this.getDataValue('id')}`;
-				},
-				autoIncrement: true,
+				type: DataTypes.UUID,
+				defaultValue: DataTypes.UUIDV4,
 				primaryKey: true,
 			},
 			name: {

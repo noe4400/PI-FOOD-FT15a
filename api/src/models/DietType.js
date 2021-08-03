@@ -6,7 +6,7 @@ module.exports = sequealize => {
 		{
 			name: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 		},
 		{ timestamps: false }

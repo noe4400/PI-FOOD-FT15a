@@ -8,30 +8,51 @@ const axios = require('axios');
 
 const router = Router();
 
+const createDietTypes = () => {
+	const dietTypesArray = [
+		'Gluten Free',
+		'Ketogenic',
+		'Vegetarian',
+		'Lacto-Vegetarian',
+		'Ovo-Vegetarian',
+		'Vegan',
+		'Pescetarian',
+		'Paleo',
+		'Primal',
+		'Whole30',
+	];
+
+	const results = dietTypesArray.map(async diet => {
+		const createDataType = await DietType.create({
+			name: diet,
+		});
+	});
+
+	return results;
+};
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+
 router.get('/recipes/:id', async (req, res) => {
 	let { id } = req.params;
 
 	if (!id) return res.status(404).send('invalid id');
-	try {
-		if (id.includes('-')) {
-			id = id.split('-');
-			const getlocalRecipeById = await Recipe.findByPk(parseInt(id[1]));
-			if (!getlocalRecipe) return res.status(404).send('Not found');
-			return res.send(getlocalRecipe);
-		}
 
-		const getReceipeById = await axios.get(
-			`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
-		);
-
-		// if (!getReceipeById) return res.status(404).send('Not found');
-
-		res.send(getReceipeById.data);
-	} catch (err) {
-		res.status(404).send('Not found');
+	if (id.includes('-')) {
+		const getlocalRecipeById = await Recipe.findByPk(id);
+		console.log('includes -', getlocalRecipeById);
+		if (!getlocalRecipeById) return res.status(404).send('Not found');
+		return res.send(getlocalRecipeById);
 	}
+
+	const getReceipeById = await axios.get(
+		`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`
+	);
+
+	if (!getReceipeById) return res.status(404).send('Not found');
+
+	res.send(getReceipeById.data);
 });
 
 router.get('/recipes', async (req, res) => {
@@ -58,6 +79,7 @@ router.get('/recipes', async (req, res) => {
 
 	const getRecipe = await Recipe.findAll({
 		where: { name: { [Op.iLike]: `%${name}%` } },
+		include: DietType,
 	});
 
 	if (getRecipe.length > 0 && responseApi.length > 0) {
@@ -77,38 +99,15 @@ router.get('/types', async (req, res) => {
 
 	if (getTypes.length > 0) return res.send(getTypes);
 
-	const dietTypesArray = [
-		'Gluten Free',
-		'Ketogenic',
-		'Vegetarian',
-		'Lacto-Vegetarian',
-		'Ovo-Vegetarian',
-		'Vegan',
-		'Pescetarian',
-		'Paleo',
-		'Primal',
-		'Whole30',
-	];
-
-	const promises = dietTypesArray.map(async diet => {
-		const createDataType = await DietType.create({
-			name: diet,
-		});
-	});
-
-	const promisesResult = await Promise.all(promises);
-
-	if (!promisesResult)
-		return res
-			.status(404)
-			.send('Unable to obtain diet types, please try again');
+	const promisesResult = await Promise.all(createDietTypes());
 
 	getTypes = await DietType.findAll();
 	res.send(getTypes);
 });
 
 router.post('/recipe', async (req, res) => {
-	const { name, summary, score, healthscore, steps } = req.body;
+	const { name, summary, score, healthscore, steps, dietTypes } = req.body;
+
 	const newRecipe = await Recipe.create({
 		name,
 		summary,
@@ -116,7 +115,26 @@ router.post('/recipe', async (req, res) => {
 		healthscore,
 		steps,
 	});
-	res.send('Recipe was created successfully');
+	dietTypes.forEach(async types => {
+		let getDietType = await DietType.findOne({
+			where: {
+				name: types,
+			},
+		});
+		if (!getDietType) {
+			const promisesResult = await Promise.all(createDietTypes());
+		}
+
+		getDietType = await DietType.findOne({
+			where: {
+				name: types,
+			},
+		});
+
+		newRecipe.addDietType(getDietType);
+	});
+
+	res.status(200).send(newRecipe);
 });
 
 module.exports = router;
