@@ -10,7 +10,11 @@ const reducer = (state = initialState, action) => {
 				...state,
 				dietTypes: [...action.payload],
 			};
-
+		case 'GET_SEARCH_RESULTS':
+			return {
+				...state,
+				searchResults: [...action.payload],
+			};
 		default:
 			return {
 				state,
