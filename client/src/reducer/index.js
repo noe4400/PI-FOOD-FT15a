@@ -1,6 +1,9 @@
 const initialState = {
 	dietTypes: [],
 	searchResults: [],
+	isLoading: false,
+	currentPage: 1,
+	resultsPerPage: 10,
 };
 
 const reducer = (state = initialState, action) => {
@@ -14,6 +17,13 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				searchResults: [...action.payload],
+				isLoading: false,
+			};
+
+		case 'CHANGE_LOADING':
+			return {
+				...state,
+				isLoading: action.payload,
 			};
 		default:
 			return {

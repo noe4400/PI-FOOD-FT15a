@@ -10,7 +10,7 @@ export function getDietTypes() {
 					payload: response.data,
 				});
 			})
-			.cath(err => console.log(err));
+			.catch(err => console.log(err));
 	};
 }
 
@@ -24,6 +24,16 @@ export function searchByName(name) {
 					payload: response.data,
 				});
 			})
-			.cath(err => console.log(err));
+			.catch(err => console.log(err));
+	};
+}
+
+export function setLoading(param) {
+	console.log('change loading');
+	return function (dispatch) {
+		dispatch({
+			type: 'CHANGE_LOADING',
+			payload: param,
+		});
 	};
 }
