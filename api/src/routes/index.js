@@ -61,7 +61,7 @@ router.get('/recipes', async (req, res) => {
 	const { name } = req.query;
 	if (!name) return res.status(404).send('Please enter a valid name');
 	const apiRequest = await axios.get(
-		`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&addRecipeInformation=true&apiKey=${API_KEY}`
+		`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=100&addRecipeInformation=true&apiKey=${API_KEY}`
 	);
 	let responseApi = apiRequest.data.results;
 	let filterResponse;
