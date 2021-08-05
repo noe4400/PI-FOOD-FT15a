@@ -1,0 +1,7 @@
+.results-container {
+	width: 80%;
+	margin: 10px auto;
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+}

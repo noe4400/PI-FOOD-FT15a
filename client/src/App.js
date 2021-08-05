@@ -5,6 +5,7 @@ import Nav from './components/Nav/Nav';
 import Home from './components/Home/Home';
 import Recipes from './components/Recipes/Recipes';
 import Pagination from './components/Pagination/Pagination';
+
 function App() {
 	return (
 		<div>
