@@ -29,11 +29,19 @@ export function searchByName(name) {
 }
 
 export function setLoading(param) {
-	console.log('change loading');
 	return function (dispatch) {
 		dispatch({
 			type: 'CHANGE_LOADING',
 			payload: param,
+		});
+	};
+}
+
+export function setPageNumbers(array) {
+	return function (dispatch) {
+		dispatch({
+			type: 'SET_PAGE_NUMBERS',
+			payload: array,
 		});
 	};
 }
