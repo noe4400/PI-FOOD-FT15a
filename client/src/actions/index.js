@@ -45,3 +45,12 @@ export function setPageNumbers(array) {
 		});
 	};
 }
+
+export function setCurrentPage(currentPage) {
+	return function (dispatch) {
+		dispatch({
+			type: 'SET_CURRENT_PAGE',
+			payload: currentPage,
+		});
+	};
+}

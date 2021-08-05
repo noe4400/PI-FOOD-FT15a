@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPageNumbers } from '../../actions';
+import { setPageNumbers, setCurrentPage } from '../../actions';
 import './Pagination.css';
 
 const Pagination = () => {
@@ -9,6 +9,11 @@ const Pagination = () => {
 	const resultsPerPage = useSelector(state => state.resultsPerPage);
 	const currentPage = useSelector(state => state.currentPage);
 	const pageNumbers = [];
+
+	const currentPageHandler = number => {
+		console.log(number);
+		dispatch(setCurrentPage(number));
+	};
 
 	if (searchResults.length === 0) return <div></div>;
 	for (
@@ -32,6 +37,7 @@ const Pagination = () => {
 							number === currentPage ? 'active' : ''
 						}`}
 						key={number}
+						onClick={() => currentPageHandler(number)}
 					>
 						<span>{number}</span>
 					</li>

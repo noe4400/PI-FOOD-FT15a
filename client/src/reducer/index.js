@@ -5,6 +5,7 @@ const initialState = {
 	currentPage: 1,
 	resultsPerPage: 10,
 	pageNumbers: [],
+	isServerUp: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,7 +20,6 @@ const reducer = (state = initialState, action) => {
 				...state,
 				searchResults: [...action.payload],
 				isLoading: false,
-				resultsPerPage: state.resultsPerPage,
 			};
 
 		case 'CHANGE_LOADING':
@@ -27,7 +27,11 @@ const reducer = (state = initialState, action) => {
 				...state,
 				isLoading: action.payload,
 			};
-
+		case 'SET_CURRENT_PAGE':
+			return {
+				...state,
+				currentPage: action.payload,
+			};
 		default:
 			return state;
 	}

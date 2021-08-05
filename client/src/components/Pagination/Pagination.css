@@ -5,7 +5,6 @@
 .pagination-container ul {
 	display: flex;
 	justify-content: center;
-
 	width: 100%;
 	border-radius: 50px;
 }
@@ -18,7 +17,7 @@
 	cursor: pointer;
 	padding: 15px;
 	margin: 15px;
-	border-radius: 50%;
+	border-radius: 10px;
 }
 
 .pagination-container ul li .numb {
@@ -38,10 +37,8 @@
 }
 
 .pagination-container ul li.active,
-.pagination-container ul li a:hover,
 .pagination-container ul li.numb:hover,
-.pagination-container ul li.btn:hover,
-.pagination-container ul li span:hover {
-	background: #f54748;
+.pagination-container ul li.btn:hover {
+	border: 2px solid #f54748;
 	color: #fff;
 }
