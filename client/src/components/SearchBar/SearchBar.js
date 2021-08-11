@@ -14,6 +14,7 @@ const SearchBar = () => {
 	const searchHandler = () => {
 		dispatch(setLoading(true));
 		dispatch(searchByName(userInput));
+		setInput('');
 	};
 	return (
 		<div class='wrap'>

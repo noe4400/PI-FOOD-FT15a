@@ -8,7 +8,8 @@ const Recipe = props => {
 			<div className={RecipeCSS.textContainer}>
 				<h3 className={RecipeCSS.h4}>{props.name}</h3>
 				<p>
-					<span>Diets: </span>
+					{types.length > 0 && <span>Diets: </span>}
+
 					<ul>{types}</ul>
 				</p>
 			</div>

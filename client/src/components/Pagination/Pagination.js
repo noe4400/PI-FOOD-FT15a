@@ -28,9 +28,6 @@ const Pagination = () => {
 	return (
 		<nav className='pagination-container'>
 			<ul>
-				<li className='btn prev'>
-					<span>Prev</span>
-				</li>
 				{pageNumbers.map(number => (
 					<li
 						className={`numb ${
@@ -42,9 +39,6 @@ const Pagination = () => {
 						<span>{number}</span>
 					</li>
 				))}
-				<li className='btn next'>
-					<span>Next</span>
-				</li>
 			</ul>
 		</nav>
 	);

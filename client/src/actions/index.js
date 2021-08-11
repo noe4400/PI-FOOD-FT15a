@@ -10,7 +10,7 @@ export function getDietTypes() {
 					payload: response.data,
 				});
 			})
-			.catch(err => console.log(err));
+			.catch(err => console.log('err', err.response.status));
 	};
 }
 
@@ -24,7 +24,16 @@ export function searchByName(name) {
 					payload: response.data,
 				});
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+				if ((err.response.status = '404')) {
+					return dispatch({
+						type: 'FOUND_RESULTS',
+					});
+				}
+				dispatch({
+					type: 'FOUND_RESULTS',
+				});
+			});
 	};
 }
 

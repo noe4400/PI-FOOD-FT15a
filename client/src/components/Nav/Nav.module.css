@@ -12,38 +12,37 @@
 	margin: 25px;
 	font-family: 'Righteous', cursive;
 }
-.nav-links ul {
+.navLinks ul {
 	margin: 0;
 	padding: 0;
 	display: flex;
 }
 
-.nav-links li {
+.navLinks li {
 	list-style: none;
 }
 
-.nav-links li a {
+.navLinks li a {
 	text-decoration: none;
 	color: #343f56;
 	padding: 1rem;
 	display: block;
 	font-size: 20px;
-	font-size: 800;
 	font-family: 'Righteous', cursive;
 	position: relative;
 }
 
-.nav-links li a:after {
+.navLinks li a:after {
 	content: '';
 	width: 0%;
 	height: 10px;
 	position: absolute;
-	left: 9%;
+	left: 10%;
 	top: 40px;
 	background: #f54748;
-	transition: 0.3s;
+	transition: 0.4s;
 }
 
-.nav-links li a:hover:after {
+.navLinks li a:hover:after {
 	width: 80%;
 }

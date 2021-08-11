@@ -1,63 +1,59 @@
-.container {
-	height: 100vh;
-
-	/* background: rgb(251, 147, 0);
-	background: radial-gradient(
-		circle at bottom right,
-		rgba(251, 147, 0, 0.6) 28%,
-		rgba(245, 230, 202, 0.8) 76%
-	); */
-}
 .wrapper {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	position: relative;
 }
 
-.left-side {
-	margin-left: 60px;
+.leftSide {
+	flex: 1;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
 	position: relative;
+	overflow: hidden;
+	padding: 5vw;
+}
+.rightSide {
+	flex: 1;
+	overflow: hidden;
+	position: relative;
 }
 
-.left-side::after {
+.leftSide::after {
 	content: '';
 	width: 15px;
 	height: 45%;
 	background-color: #fbab7e;
-	background-image: linear-gradient(0deg, #fbab7e 0%, #f7ce68 100%);
+	background-image: linear-gradient(0deg, #302e2e 0%, #f7ce68 100%);
 	position: absolute;
 	left: 0px;
 	top: 130px;
 }
 
-h1 {
-	font-size: 150px;
+.wrapper h1 {
+	font-size: 1.4rem;
 	color: #343f56;
 	font-weight: 900;
 	margin: 100px 0 0 50px;
 }
-h3 {
-	font-size: 30px;
+.wrapper h3,
+span {
+	font-size: 1.1rem;
 	color: rgba(52, 63, 86, 0.75);
 }
 
-span {
+.wrapper span {
 	color: #f54748;
 }
 
-.right-side img {
+.rightSide img {
 	position: relative;
-	margin-top: 100px;
-	margin-right: 100px;
 	align-content: center;
-	width: 800px;
+	width: 80%;
 }
 
-.rectangle-img {
+.rectangleImg {
 	position: absolute;
 	background-color: #fbab7e;
 	background-image: linear-gradient(0deg, #fbab7e 0%, #f7ce68 100%);
@@ -65,11 +61,11 @@ span {
 	top: 150px;
 	border-radius: 20px 0 0 20px;
 	height: 80%;
-	width: 30%;
+	width: 80%;
 	z-index: -1;
 }
 
-.log-in-button {
+.logInButton {
 	margin: 25px;
 	width: 200px;
 	padding: 10px;
@@ -80,20 +76,37 @@ span {
 	background-image: linear-gradient(90deg, #fbab7e 0%, #f7ce68 100%);
 	transition: width 0.3s;
 	border: none;
-	margin-left: 80%;
+
 	border-radius: 30px;
 }
-.log-in-button img {
+.logInButton img {
 	width: 40px;
 	display: none;
 }
-.log-in-button:hover img {
+.logInButton:hover img {
 	display: block;
 }
-.log-in-button:hover {
+.logInButton:hover {
 	background: #f54748;
 	width: 230px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	text-decoration: none;
+}
+
+@media screen and (max-width: 1024px) {
+	.wrapper {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.wrapper h3 {
+		font-size: 20px;
+	}
+	.rightSide {
+		align-self: flex-end;
+	}
+	.rightSide img {
+		width: 400px;
+	}
 }

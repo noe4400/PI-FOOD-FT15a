@@ -1,21 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Nav.css';
+import navStyles from './Nav.module.css';
 
 const Nav = () => {
 	return (
-		<nav className='navbar'>
-			<div className='logo'>Food App</div>
-			<div className='nav-links'>
+		<nav className={navStyles.navbar}>
+			<div className={navStyles.logo}>Food App</div>
+			<div className={navStyles.navLinks}>
 				<ul>
 					<li>
-						<a href='#'> Home </a>
+						<Link to='/home'> Home </Link>
 					</li>
+
 					<li>
-						<a href='#'> About </a>
+						<Link to='/about'> About </Link>
 					</li>
+
 					<li>
-						<a href='#'> Contact </a>
+						<Link to='/addRecipe'>Add a Recipe</Link>
 					</li>
 				</ul>
 			</div>
