@@ -22,7 +22,7 @@ const SearchBar = () => {
 				<input
 					type='text'
 					class='searchTerm'
-					placeholder='Find a recipe and give an extra touch to your meals'
+					placeholder='Find any recipe you want'
 					value={userInput}
 					onChange={inputHandler}
 				/>
