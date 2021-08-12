@@ -14,6 +14,7 @@ const LandingPage = () => {
 					<h3>
 						<span>Join us</span> and discover hundreds of recipes.
 					</h3>
+
 					<Link to='/home'>
 						<button class={landingStyles.logInButton}>
 							Star Now! <img src={arrow} alt='left arrow' />{' '}

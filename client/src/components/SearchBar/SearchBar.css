@@ -17,6 +17,7 @@
 	outline: none;
 	color: #343f56;
 	font-size: 30px;
+	height: 65px;
 }
 
 .searchTerm:focus {

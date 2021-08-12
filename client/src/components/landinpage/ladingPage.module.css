@@ -1,7 +1,7 @@
 .wrapper {
 	display: flex;
 	align-items: center;
-	/* justify-content: space-between; */
+	justify-content: space-between;
 	position: relative;
 }
 
@@ -10,9 +10,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	position: relative;
-	overflow: hidden;
-	padding: 5vw;
+	padding: 1rem;
 }
 .rightSide {
 	flex: 1;
@@ -20,27 +18,16 @@
 	position: relative;
 }
 
-.leftSide::after {
-	content: '';
-	width: 15px;
-	height: 45%;
-	background-color: #fbab7e;
-	background-image: linear-gradient(0deg, #302e2e 0%, #f7ce68 100%);
-	position: absolute;
-	left: 0px;
-	top: 130px;
-}
-
 .wrapper h1 {
-	font-size: 1.4rem;
 	color: #343f56;
 	font-weight: 900;
 	margin: 100px 0 0 50px;
+	font-size: 5rem;
 }
-.wrapper h3,
-span {
+.wrapper h3.span {
 	font-size: 1.1rem;
 	color: rgba(52, 63, 86, 0.75);
+	font-size: 2rem;
 }
 
 .wrapper span {
@@ -50,7 +37,8 @@ span {
 .rightSide img {
 	position: relative;
 	align-content: center;
-	width: 80%;
+	max-width: 70%;
+	display: block;
 }
 
 .rectangleImg {
@@ -98,15 +86,19 @@ span {
 @media screen and (max-width: 1024px) {
 	.wrapper {
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: center;
 	}
-	.wrapper h3 {
-		font-size: 20px;
+	.wrapper h1 {
+		font-size: 3rem;
+	}
+	.wrapper h3.span {
+		font-size: 1rem;
 	}
 	.rightSide {
 		align-self: flex-end;
 	}
-	.rightSide img {
-		width: 400px;
+	.rectangleImg {
+		left: 0;
+		border-radius: 0px 20px 20px 0px;
 	}
 }

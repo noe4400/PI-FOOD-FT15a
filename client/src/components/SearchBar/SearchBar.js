@@ -26,6 +26,7 @@ const SearchBar = () => {
 					value={userInput}
 					onChange={inputHandler}
 				/>
+
 				<button type='submit' class='searchButton'>
 					<i class='fa fa-search' onClick={searchHandler}>
 						<img src={icon} />
