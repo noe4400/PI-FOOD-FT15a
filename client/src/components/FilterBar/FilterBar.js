@@ -6,10 +6,6 @@ import { setOrderBy, setLoading } from '../../actions';
 const FilterBar = () => {
 	const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	dispatch(orderASC(searchResults, orderBy));
-	// }, [dispatch, orderBy]);
-
 	const changeOrder = e => {
 		dispatch(setOrderBy(e.target.value));
 	};

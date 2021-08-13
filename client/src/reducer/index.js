@@ -66,6 +66,22 @@ const reducer = (state = initialState, action) => {
 					.sort((a, b) => (a.name > b.name ? 1 : -1))
 					.reverse(),
 			};
+		case 'ORDER_GS':
+			return {
+				...state,
+				isLoading: false,
+				searchResults: state.searchResults.sort((a, b) =>
+					a.score < b.score ? 1 : -1
+				),
+			};
+		case 'ORDER_LS':
+			return {
+				...state,
+				isLoading: false,
+				searchResults: state.searchResults
+					.sort((a, b) => (a.score < b.score ? 1 : -1))
+					.reverse(),
+			};
 		case 'SET_ORDER':
 			return {
 				...state,
