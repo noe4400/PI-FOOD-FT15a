@@ -37,6 +37,23 @@ export function searchByName(name) {
 	};
 }
 
+export function postRecipe(obj) {
+	return function (dispatch) {
+		return axios
+			.post('http://localhost:3001/recipe', {
+				name: obj.name,
+				summary: obj.summary,
+				score: obj.score,
+				healthscore: obj.healthscore,
+				steps: obj.steps,
+				dietTypes: obj.dietTypes,
+			})
+			.then(res => {
+				console.log(res);
+			});
+	};
+}
+
 export function setLoading(param) {
 	return function (dispatch) {
 		dispatch({

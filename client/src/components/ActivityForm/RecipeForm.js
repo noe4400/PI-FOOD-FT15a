@@ -1,11 +1,22 @@
 import React from 'react';
 import './RecipeForm.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDietTypes } from '../../actions';
+import { getDietTypes, postRecipe } from '../../actions';
 
 const RecipeForm = () => {
 	const dispatch = useDispatch();
+	const [userInput, setInput] = useState({
+		name: '',
+		score: 0,
+		healthScore: 0,
+		summary: '',
+		steps: [],
+		dietTypesArray: [],
+	});
+	const submitHandler = () => {
+		console.log('submit click');
+	};
 
 	useEffect(() => {
 		dispatch(getDietTypes());
@@ -15,11 +26,55 @@ const RecipeForm = () => {
 	const handleCheckDietTypeElement = e => {
 		dietTypes.forEach(diet => {
 			if (diet.name === e.target.value) {
-				diet.isChecked = e.target.checked;
+				if (e.target.checked) {
+					setInput(prevState => {
+						return {
+							...prevState,
+							dietTypesArray: [
+								...prevState.dietTypesArray,
+								e.target.value,
+							],
+						};
+					});
+				} else {
+					const index = userInput.dietTypesArray.indexOf(
+						e.target.value
+					);
+
+					console.log(index);
+				}
 			}
 		});
 	};
 
+	const inputHandler = e => {
+		if (e.target.name === 'name') {
+			setInput(prevState => {
+				return {
+					...prevState,
+					name: e.target.value,
+				};
+			});
+		}
+
+		if (e.target.name === 'score') {
+			setInput(prevState => {
+				return {
+					...prevState,
+					score: e.target.value,
+				};
+			});
+		}
+
+		if (e.target.name === 'healthScore') {
+			setInput(prevState => {
+				return {
+					...prevState,
+					healthScore: e.target.value,
+				};
+			});
+		}
+	};
 	const DietOptions = dietTypes.map(e => (
 		<label for={`opt${e.id}`} className='radio' key={e.id}>
 			<input
@@ -40,25 +95,43 @@ const RecipeForm = () => {
 			<div className='form'>
 				<div className='input-field'>
 					<label>Recipe's name:</label>
-					<input className='input' type='text' />
+					<input
+						className='input'
+						type='text'
+						name='name'
+						value={userInput.name}
+						onChange={inputHandler}
+					/>
 				</div>
 
 				<div className='input-field'>
 					<label>Recipe's score:</label>
-					<input className='input' type='number' />
+					<input
+						className='input'
+						type='number'
+						name='score'
+						value={userInput.score}
+						onChange={inputHandler}
+					/>
 				</div>
 				<div className='input-field'>
 					<label>Recipe's health score:</label>
-					<input className='input' type='number' />
+					<input
+						className='input'
+						type='number'
+						name='healthScore'
+						value={userInput.healthScore}
+						onChange={inputHandler}
+					/>
 				</div>
 				<div className='input-field'>
 					<label>Recipe's summary:</label>
-					<textarea className='textarea'></textarea>
+					<textarea className='textarea' name='summary'></textarea>
 				</div>
 
 				<div className='input-field'>
 					<label>Recipe's steps:</label>
-					<textarea className='textarea'></textarea>
+					<textarea className='textarea' name='steps'></textarea>
 				</div>
 
 				<div className='checkbox-container'>
@@ -69,7 +142,12 @@ const RecipeForm = () => {
 				</div>
 
 				<div className='input-field'>
-					<input type='submit' value='Add Recipe' className='btn' />
+					<input
+						type='submit'
+						value='Add Recipe'
+						className='btn'
+						onClick={submitHandler}
+					/>
 				</div>
 			</div>
 		</div>
