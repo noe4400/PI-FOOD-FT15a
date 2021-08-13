@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import './FilterBar.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderASC, setOrderBy } from '../../actions';
+import { setOrderBy, setLoading } from '../../actions';
 
 const FilterBar = () => {
 	const dispatch = useDispatch();
-	const searchResults = useSelector(state => state.searchResults);
-	const orderBy = useSelector(state => state.orderBy);
 
-	useEffect(() => {
-		dispatch(orderASC(searchResults, orderBy));
-	}, [dispatch, orderBy]);
+	// useEffect(() => {
+	// 	dispatch(orderASC(searchResults, orderBy));
+	// }, [dispatch, orderBy]);
 
 	const changeOrder = e => {
 		dispatch(setOrderBy(e.target.value));

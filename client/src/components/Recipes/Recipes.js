@@ -1,22 +1,24 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Recipe from '../Recipe/Recipe';
-import { getDietTypes } from '../../actions';
+import { orderResults, setLoading } from '../../actions';
 import './Recipes.css';
 const Recipes = () => {
+	const dispatch = useDispatch();
 	const isLoading = useSelector(state => state.isLoading);
-	const isLoaservding = useSelector(state => state.isLoading);
 	const foundResults = useSelector(state => state.foundResults);
 	const currentPage = useSelector(state => state.currentPage);
 	const resultsPerPage = useSelector(state => state.resultsPerPage);
 	const searchResults = useSelector(state => state.searchResults);
+	const orderBy = useSelector(state => state.orderBy);
 	const indexOfLastResult = currentPage * resultsPerPage;
 	const indexOfFirstResult = indexOfLastResult - resultsPerPage;
-	const dispatch = useDispatch();
 
-	// useEffect(() => {
-	// 	dispatch(getDietTypes());
-	// }, []);
+	useEffect(() => {
+		dispatch(setLoading(true));
+		dispatch(orderResults(searchResults, orderBy));
+	}, [dispatch, orderBy, searchResults]);
+
 	console.log(indexOfFirstResult, indexOfLastResult);
 
 	if (isLoading) {

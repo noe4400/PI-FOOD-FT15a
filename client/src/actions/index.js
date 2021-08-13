@@ -80,7 +80,7 @@ export function setCurrentPage(currentPage) {
 		});
 	};
 }
-export function orderASC(results, order) {
+export function orderResults(results, order) {
 	return function (dispatch) {
 		dispatch({
 			type: `ORDER_${order}`,
