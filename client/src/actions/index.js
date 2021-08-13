@@ -7,7 +7,7 @@ export function getDietTypes() {
 			.then(response => {
 				dispatch({
 					type: 'GET_DIET_TYPES',
-					payload: response.data,
+					payload: response.data.map(e => e.name),
 				});
 			})
 			.catch(err => console.log('err', err.response.status));

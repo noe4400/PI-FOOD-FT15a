@@ -6,6 +6,7 @@ import { getDietTypes, postRecipe } from '../../actions';
 
 const RecipeForm = () => {
 	const dispatch = useDispatch();
+
 	const [userInput, setInput] = useState({
 		name: '',
 		score: 0,
@@ -14,6 +15,7 @@ const RecipeForm = () => {
 		steps: [],
 		dietTypesArray: [],
 	});
+
 	const submitHandler = () => {
 		console.log('submit click');
 	};
@@ -23,27 +25,30 @@ const RecipeForm = () => {
 	}, []);
 
 	const dietTypes = useSelector(state => state.dietTypes);
+	console.log(dietTypes);
+	const auxDietTypes = [...userInput.dietTypesArray];
 	const handleCheckDietTypeElement = e => {
 		dietTypes.forEach(diet => {
-			if (diet.name === e.target.value) {
+			if (diet === e.target.value) {
 				if (e.target.checked) {
-					setInput(prevState => {
-						return {
-							...prevState,
-							dietTypesArray: [
-								...prevState.dietTypesArray,
-								e.target.value,
-							],
-						};
-					});
+					auxDietTypes.push(e.target.value);
 				} else {
-					const index = userInput.dietTypesArray.indexOf(
-						e.target.value
-					);
-
+					const index = auxDietTypes.indexOf(e.target.value);
 					console.log(index);
+					if (index !== -1 && auxDietTypes.length > 0) {
+						auxDietTypes.splice(index, 1);
+					}
 				}
 			}
+		});
+		// console.log(dietTypes);
+		// /*modificar stado aqui*/
+		console.log(auxDietTypes);
+		setInput(prevState => {
+			return {
+				...prevState,
+				dietTypesArray: auxDietTypes,
+			};
 		});
 	};
 
@@ -75,18 +80,18 @@ const RecipeForm = () => {
 			});
 		}
 	};
-	const DietOptions = dietTypes.map(e => (
-		<label for={`opt${e.id}`} className='radio' key={e.id}>
+	const DietOptions = dietTypes.map((e, index) => (
+		<label for={`opt${index}`} className='radio' key={index}>
 			<input
 				type='checkbox'
-				id={`opt${e.id}`}
+				id={`opt${index}`}
 				className='radio-input'
 				name='diets'
-				value={e.name}
+				value={e}
 				onClick={handleCheckDietTypeElement}
 			/>
 			<div className='radio__radio'></div>
-			{e.name}
+			{e}
 		</label>
 	));
 	return (
