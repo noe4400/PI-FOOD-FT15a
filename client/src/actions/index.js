@@ -44,9 +44,9 @@ export function postRecipe(obj) {
 				name: obj.name,
 				summary: obj.summary,
 				score: obj.score,
-				healthscore: obj.healthscore,
+				healthscore: obj.healthScore,
 				steps: obj.steps,
-				dietTypes: obj.dietTypes,
+				dietTypes: obj.dietTypesArray,
 			})
 			.then(res => {
 				console.log(res);

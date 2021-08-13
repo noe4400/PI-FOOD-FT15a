@@ -12,12 +12,13 @@ const RecipeForm = () => {
 		score: 0,
 		healthScore: 0,
 		summary: '',
-		steps: [],
+		steps: '',
 		dietTypesArray: [],
 	});
 
 	const submitHandler = () => {
 		console.log('submit click');
+		dispatch(postRecipe(userInput));
 	};
 
 	useEffect(() => {
@@ -25,7 +26,7 @@ const RecipeForm = () => {
 	}, []);
 
 	const dietTypes = useSelector(state => state.dietTypes);
-	console.log(dietTypes);
+
 	const auxDietTypes = [...userInput.dietTypesArray];
 	const handleCheckDietTypeElement = e => {
 		dietTypes.forEach(diet => {
@@ -41,8 +42,7 @@ const RecipeForm = () => {
 				}
 			}
 		});
-		// console.log(dietTypes);
-		// /*modificar stado aqui*/
+
 		console.log(auxDietTypes);
 		setInput(prevState => {
 			return {
@@ -58,6 +58,24 @@ const RecipeForm = () => {
 				return {
 					...prevState,
 					name: e.target.value,
+				};
+			});
+		}
+
+		if (e.target.name === 'summary') {
+			setInput(prevState => {
+				return {
+					...prevState,
+					summary: e.target.value,
+				};
+			});
+		}
+
+		if (e.target.name === 'steps') {
+			setInput(prevState => {
+				return {
+					...prevState,
+					steps: e.target.value,
 				};
 			});
 		}
@@ -131,12 +149,20 @@ const RecipeForm = () => {
 				</div>
 				<div className='input-field'>
 					<label>Recipe's summary:</label>
-					<textarea className='textarea' name='summary'></textarea>
+					<textarea
+						className='textarea'
+						name='summary'
+						onChange={inputHandler}
+					></textarea>
 				</div>
 
 				<div className='input-field'>
 					<label>Recipe's steps:</label>
-					<textarea className='textarea' name='steps'></textarea>
+					<textarea
+						className='textarea'
+						name='steps'
+						onChange={inputHandler}
+					></textarea>
 				</div>
 
 				<div className='checkbox-container'>
