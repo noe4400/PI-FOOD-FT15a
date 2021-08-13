@@ -80,3 +80,19 @@ export function setCurrentPage(currentPage) {
 		});
 	};
 }
+export function orderASC(results, order) {
+	return function (dispatch) {
+		dispatch({
+			type: `ORDER_${order}`,
+			payload: results,
+		});
+	};
+}
+export function setOrderBy(order) {
+	return function (dispatch) {
+		dispatch({
+			type: 'SET_ORDER',
+			payload: order,
+		});
+	};
+}

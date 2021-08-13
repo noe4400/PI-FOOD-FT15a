@@ -5,6 +5,7 @@ const initialState = {
 	currentPage: 1,
 	resultsPerPage: 10,
 	pageNumbers: [],
+	orderBy: 'ASC',
 	foundResults: true,
 	serverUp: true,
 };
@@ -49,6 +50,26 @@ const reducer = (state = initialState, action) => {
 				serverUp: false,
 				isLoading: false,
 			};
+		case 'ORDER_ASC':
+			return {
+				...state,
+				searchResults: state.searchResults.sort((a, b) =>
+					a.name > b.name ? 1 : -1
+				),
+			};
+		case 'ORDER_DESC':
+			return {
+				...state,
+				searchResults: state.searchResults
+					.sort((a, b) => (a.name > b.name ? 1 : -1))
+					.reverse(),
+			};
+		case 'SET_ORDER':
+			return {
+				...state,
+				orderBy: action.payload,
+			};
+
 		default:
 			return state;
 	}

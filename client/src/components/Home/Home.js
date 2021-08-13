@@ -9,13 +9,6 @@ const Home = () => {
 				<h1>Love cooking?</h1>
 				<SearchBar />
 			</div>
-			{/* 
-			<div className='chef-bar-wrapper'>
-				<img className='chef' src={chef} />
-				<div className='searchbox-container'>
-					<SearchBar />
-				</div>
-			</div> */}
 		</div>
 	);
 };
