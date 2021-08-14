@@ -9,10 +9,11 @@ const Recipes = () => {
 	const foundResults = useSelector(state => state.foundResults);
 	const currentPage = useSelector(state => state.currentPage);
 	const resultsPerPage = useSelector(state => state.resultsPerPage);
-	const searchResults = useSelector(state => state.searchResults);
+	let searchResults = useSelector(state => state.searchResults);
 	const orderBy = useSelector(state => state.orderBy);
 	const indexOfLastResult = currentPage * resultsPerPage;
 	const indexOfFirstResult = indexOfLastResult - resultsPerPage;
+	const filter = useSelector(state => state.filter);
 
 	useEffect(() => {
 		dispatch(setLoading(true));
@@ -27,11 +28,17 @@ const Recipes = () => {
 	if (!foundResults) {
 		return <h2 className='loading-message'>Not results were found....</h2>;
 	}
+	if (filter !== 'ALL') {
+		searchResults = searchResults.filter(result =>
+			result.diets.includes(filter.toLowerCase())
+		);
+	}
 
 	const currrentRecipes = searchResults.slice(
 		indexOfFirstResult,
 		indexOfLastResult
 	);
+
 	const displayResults = currrentRecipes.map(recipe => (
 		<Recipe
 			key={recipe.id}
