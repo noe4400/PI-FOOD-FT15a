@@ -96,3 +96,12 @@ export function setOrderBy(order) {
 		});
 	};
 }
+
+export function setFilter(filter) {
+	return function (dispatch) {
+		dispatch({
+			type: 'SET_FILTER',
+			payload: filter,
+		});
+	};
+}

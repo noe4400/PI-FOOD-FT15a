@@ -8,6 +8,7 @@ const initialState = {
 	orderBy: 'ASC',
 	foundResults: true,
 	serverUp: true,
+	filter: 'ALL',
 };
 
 const reducer = (state = initialState, action) => {
@@ -86,6 +87,11 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				orderBy: action.payload,
+			};
+		case 'SET_FILTER':
+			return {
+				...state,
+				filter: action.payload,
 			};
 
 		default:
