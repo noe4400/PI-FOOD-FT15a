@@ -42,9 +42,17 @@ router.get('/recipes/:id', async (req, res) => {
 	if (id.includes('-')) {
 		const getlocalRecipeById = await Recipe.findOne({
 			where: { id: id },
-			include: DietType,
+			include: {
+				model: DietType,
+				as: 'diets',
+				attributes: ['name'],
+				through: {
+					attributes: [],
+				},
+			},
 		});
 		if (!getlocalRecipeById) return res.status(404).send('Not found');
+
 		return res.send(getlocalRecipeById);
 	}
 
@@ -68,20 +76,26 @@ router.get('/recipes', async (req, res) => {
 	if (responseApi.length > 0) {
 		filterResponse = responseApi.map(recipe => ({
 			id: recipe.id,
-			name: recipe.title,
+			title: recipe.title,
 			image: recipe.image,
 			summary: recipe.summary,
 			dishTypes: recipe.dishTypes,
 			healthscore: recipe.healthScore,
 			score: recipe.spoonacularScore,
 			diets: recipe.diets,
-			steps: recipe.analyzedInstructions.map(steps => steps.steps),
 		}));
 	}
 
 	const getRecipe = await Recipe.findAll({
-		where: { name: { [Op.iLike]: `%${name}%` } },
-		include: DietType,
+		where: { title: { [Op.iLike]: `%${name}%` } },
+		include: {
+			model: DietType,
+			as: 'diets',
+			attributes: ['name'],
+			through: {
+				attributes: [],
+			},
+		},
 	});
 
 	if (getRecipe.length > 0 && responseApi.length > 0) {
@@ -108,14 +122,15 @@ router.get('/types', async (req, res) => {
 });
 
 router.post('/recipe', async (req, res) => {
-	const { name, summary, score, healthscore, steps, dietTypes } = req.body;
+	const { title, summary, score, healthscore, instructions, dietTypes } =
+		req.body;
 
 	const newRecipe = await Recipe.create({
-		name,
+		title,
 		summary,
 		score,
 		healthscore,
-		steps,
+		instructions,
 	});
 	dietTypes.forEach(async types => {
 		let getDietType = await DietType.findOne({
@@ -133,7 +148,7 @@ router.post('/recipe', async (req, res) => {
 			},
 		});
 
-		newRecipe.addDietType(getDietType);
+		newRecipe.addDiets(getDietType);
 	});
 
 	res.status(200).send(newRecipe);
