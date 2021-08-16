@@ -56,7 +56,7 @@ const reducer = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				searchResults: state.searchResults.sort((a, b) =>
-					a.name > b.name ? 1 : -1
+					a.title > b.title ? 1 : -1
 				),
 			};
 		case 'ORDER_DESC':
@@ -64,7 +64,7 @@ const reducer = (state = initialState, action) => {
 				...state,
 				isLoading: false,
 				searchResults: state.searchResults
-					.sort((a, b) => (a.name > b.name ? 1 : -1))
+					.sort((a, b) => (a.title > b.title ? 1 : -1))
 					.reverse(),
 			};
 		case 'ORDER_GS':

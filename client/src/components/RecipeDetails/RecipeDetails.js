@@ -15,11 +15,7 @@ function RecipeDetails() {
 	}, []);
 	const dishTypeList = recipeDEtail.dishTypes?.map(type => <li>{type}</li>);
 	const dietTypesList = recipeDEtail.diets?.map(diet => <li>{diet}</li>);
-	const steps =
-		recipeDEtail.analyzedInstructions &&
-		recipeDEtail.analyzedInstructions[0].steps?.map((step, index) => (
-			<li kye={index}>{step.step}</li>
-		));
+
 	return (
 		<div>
 			<header>
@@ -59,7 +55,7 @@ function RecipeDetails() {
 						<span>S</span>teps:
 					</h1>
 				</div>
-				<ol>{steps}</ol>
+				<p>{recipeDEtail.instructions}</p>
 			</section>
 		</div>
 	);

@@ -41,11 +41,11 @@ export function postRecipe(obj) {
 	return function (dispatch) {
 		return axios
 			.post('http://localhost:3001/recipe', {
-				name: obj.name,
+				title: obj.name,
 				summary: obj.summary,
 				score: obj.score,
 				healthscore: obj.healthScore,
-				steps: obj.steps,
+				instructions: obj.steps,
 				dietTypes: obj.dietTypesArray,
 			})
 			.then(res => {

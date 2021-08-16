@@ -2,7 +2,9 @@ import React from 'react';
 import RecipeCSS from './Recipe.module.css';
 import { Link } from 'react-router-dom';
 const Recipe = props => {
-	const types = props.diets.map(type => <li>{type}</li>);
+	const types = props.diets?.map(type => (
+		<li>{type.name ? type.name : type}</li>
+	));
 	return (
 		<div className={RecipeCSS.card}>
 			<img className={RecipeCSS.img} src={props.img} alt='' />
