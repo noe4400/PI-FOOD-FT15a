@@ -10,6 +10,7 @@ body {
 	font-family: sans-serif;
 	font-weight: 400;
 	font-size: 1.3125rem;
+	height: 100%;
 }
 a {
 	text-decoration: none;

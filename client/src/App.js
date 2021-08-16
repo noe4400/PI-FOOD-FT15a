@@ -7,6 +7,7 @@ import Recipes from './components/Recipes/Recipes';
 import Pagination from './components/Pagination/Pagination';
 import RecipeForm from './components/ActivityForm/RecipeForm';
 import FilterBar from './components/FilterBar/FilterBar';
+import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 			<Route exact path='/home' component={Pagination} />
 			<Route exact path='/home' component={Recipes} />
 			<Route exact path='/addRecipe' component={RecipeForm} />
+			<Route path='/country/:id' component={RecipeDetails} />
 		</div>
 	);
 }

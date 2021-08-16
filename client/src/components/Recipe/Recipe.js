@@ -1,5 +1,6 @@
 import React from 'react';
 import RecipeCSS from './Recipe.module.css';
+import { Link } from 'react-router-dom';
 const Recipe = props => {
 	const types = props.diets.map(type => <li>{type}</li>);
 	return (
@@ -13,9 +14,9 @@ const Recipe = props => {
 					<ul>{types}</ul>
 				</p>
 			</div>
-			<a class={RecipeCSS.a} href='#'>
+			<Link class={RecipeCSS.a} to={`/country/${props.id}`}>
 				More information
-			</a>
+			</Link>
 		</div>
 	);
 };

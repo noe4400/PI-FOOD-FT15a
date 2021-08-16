@@ -42,6 +42,7 @@ const Recipes = () => {
 	const displayResults = currrentRecipes.map(recipe => (
 		<Recipe
 			key={recipe.id}
+			id={recipe.id}
 			name={recipe.name}
 			img={recipe.image}
 			diets={recipe.diets}

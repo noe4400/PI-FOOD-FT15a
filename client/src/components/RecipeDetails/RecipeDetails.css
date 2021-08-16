@@ -1,0 +1,72 @@
+header {
+	position: relative;
+	background: #f54748;
+	width: 100%;
+	min-height: 40vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+header .content {
+	background: rgba(255, 255, 255, 0.4);
+	width: 80%;
+	text-align: center;
+	padding: 30px;
+	border-radius: 10px;
+	z-index: 99;
+}
+
+header .content h1 {
+	font-size: 3em;
+	color: #fff;
+}
+
+.general-information {
+	padding: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.general-information img {
+	border-radius: 10px;
+}
+.title-text {
+	margin-left: 15px;
+	color: #343f56;
+	font-size: 2em;
+	font-weight: 300px;
+}
+.title-text span {
+	color: #fb9300;
+	font-weight: 700;
+	font-size: 1.5em;
+}
+
+.general-information p {
+	font-size: 1em;
+	text-align: justify;
+	padding: 20px;
+	word-wrap: normal;
+	line-height: 1.5em;
+}
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+}
+.steps {
+	padding: 100px;
+}
+.steps .title-text {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.steps ol {
+	line-height: 2em;
+	font-size: 1.2em;
+}
