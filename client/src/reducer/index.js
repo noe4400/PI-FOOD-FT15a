@@ -9,6 +9,7 @@ const initialState = {
 	foundResults: true,
 	serverUp: true,
 	filter: 'ALL',
+	totalResults: 0,
 };
 
 const reducer = (state = initialState, action) => {

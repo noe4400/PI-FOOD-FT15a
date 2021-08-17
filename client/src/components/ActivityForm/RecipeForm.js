@@ -6,7 +6,9 @@ import { getDietTypes, postRecipe } from '../../actions';
 
 const RecipeForm = () => {
 	const dispatch = useDispatch();
-
+	useEffect(() => {
+		dispatch(getDietTypes());
+	}, []);
 	const [userInput, setInput] = useState({
 		name: '',
 		score: 0,
@@ -15,19 +17,45 @@ const RecipeForm = () => {
 		steps: '',
 		dietTypesArray: [],
 	});
+	const [inputValidation, setInputValidation] = useState({
+		isInputNameTouch: false,
+		isSummaryInputTouched: false,
+	});
+	const enteredRecipesName = userInput.name.trim() !== '';
+	const enteredSummary = userInput.summary.trim() !== '';
+	const recipeNameIsValid =
+		!enteredRecipesName && inputValidation.isInputNameTouch;
+	const summaryIsValid =
+		!enteredSummary && inputValidation.isSummaryInputTouched;
 
+	const onBlurHandlerValidation = e => {
+		setInputValidation(prevState => {
+			if (e.target.name === 'name')
+				return {
+					...prevState,
+					isInputNameTouch: true,
+				};
+			if (e.target.name === 'summary')
+				return {
+					...prevState,
+					isSummaryInputTouched: true,
+				};
+		});
+	};
+
+	let isFormValid = false;
+	if (enteredRecipesName && enteredSummary) {
+		isFormValid = true;
+	}
 	const submitHandler = () => {
 		console.log('submit click');
 		dispatch(postRecipe(userInput));
 	};
 
-	useEffect(() => {
-		dispatch(getDietTypes());
-	}, []);
-
 	const dietTypes = useSelector(state => state.dietTypes);
 
 	const auxDietTypes = [...userInput.dietTypesArray];
+
 	const handleCheckDietTypeElement = e => {
 		dietTypes.forEach(diet => {
 			if (diet === e.target.value) {
@@ -98,6 +126,7 @@ const RecipeForm = () => {
 			});
 		}
 	};
+
 	const DietOptions = dietTypes.map((e, index) => (
 		<label for={`opt${index}`} className='radio' key={index}>
 			<input
@@ -117,13 +146,16 @@ const RecipeForm = () => {
 			<div className='title'>Add your own recipe</div>
 			<div className='form'>
 				<div className='input-field'>
-					<label>Recipe's name:</label>
+					<label>Recipe's name*:</label>
 					<input
-						className='input'
+						className={`input ${
+							recipeNameIsValid ? 'invalid' : ''
+						}`}
 						type='text'
 						name='name'
 						value={userInput.name}
 						onChange={inputHandler}
+						onBlur={onBlurHandlerValidation}
 					/>
 				</div>
 
@@ -148,12 +180,15 @@ const RecipeForm = () => {
 					/>
 				</div>
 				<div className='input-field'>
-					<label>Recipe's summary:</label>
+					<label>Recipe's summary*:</label>
 					<textarea
-						className='textarea'
+						className={`textarea ${
+							summaryIsValid ? 'invalid' : ''
+						}`}
 						value={userInput.summary}
 						name='summary'
 						onChange={inputHandler}
+						onBlur={onBlurHandlerValidation}
 					></textarea>
 				</div>
 
@@ -180,6 +215,7 @@ const RecipeForm = () => {
 						value='Add Recipe'
 						className='btn'
 						onClick={submitHandler}
+						disabled={!isFormValid}
 					/>
 				</div>
 			</div>
