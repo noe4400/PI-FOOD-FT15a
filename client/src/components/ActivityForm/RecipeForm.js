@@ -151,6 +151,7 @@ const RecipeForm = () => {
 					<label>Recipe's summary:</label>
 					<textarea
 						className='textarea'
+						value={userInput.summary}
 						name='summary'
 						onChange={inputHandler}
 					></textarea>
@@ -161,6 +162,7 @@ const RecipeForm = () => {
 					<textarea
 						className='textarea'
 						name='steps'
+						value={userInput.steps}
 						onChange={inputHandler}
 					></textarea>
 				</div>

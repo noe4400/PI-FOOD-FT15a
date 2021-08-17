@@ -5,6 +5,7 @@ import axios from 'axios';
 
 function RecipeDetails() {
 	const [recipeDEtail, setRecipeDetail] = useState('');
+	const regexTags = /(<([^>]+)>)/gi;
 	const params = useParams();
 	useEffect(() => {
 		axios.get(`http://localhost:3001/recipes/${params.id}`).then(res => {
@@ -45,7 +46,7 @@ function RecipeDetails() {
 					<h1 className='title-text'>
 						<span>S</span>ummary:
 					</h1>
-					<p>{recipeDEtail.summary}</p>
+					<p>{recipeDEtail.summary?.replace(regexTags, '')}</p>
 				</div>
 			</section>
 
