@@ -2,6 +2,7 @@ import React from 'react';
 import RecipeCSS from './Recipe.module.css';
 import { Link } from 'react-router-dom';
 const Recipe = props => {
+	console.log(props);
 	const types = props.diets?.map(type => (
 		<li>{type.name ? type.name : type}</li>
 	));
@@ -16,9 +17,7 @@ const Recipe = props => {
 					<ul>{types}</ul>
 				</p>
 			</div>
-			<Link class={RecipeCSS.a} to={`/recipeDetails/${props.id}`}>
-				More information
-			</Link>
+			<Link to={`/recipeDetails/${props.id}`}>More information</Link>
 		</div>
 	);
 };

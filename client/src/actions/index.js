@@ -36,6 +36,28 @@ export function searchByName(name) {
 			});
 	};
 }
+export function searchBy() {
+	return function (dispatch) {
+		return axios
+			.get(`http://localhost:3001/recipes`)
+			.then(response => {
+				dispatch({
+					type: 'GET_SEARCH_RESULTS',
+					payload: response.data,
+				});
+			})
+			.catch(err => {
+				if ((err.response.status = '404')) {
+					return dispatch({
+						type: 'FOUND_RESULTS',
+					});
+				}
+				dispatch({
+					type: 'FOUND_RESULTS',
+				});
+			});
+	};
+}
 
 export function postRecipe(obj) {
 	return function (dispatch) {
@@ -49,7 +71,16 @@ export function postRecipe(obj) {
 				dietTypes: obj.dietTypesArray,
 			})
 			.then(res => {
-				console.log(res);
+				return dispatch({
+					type: 'POST_ERROR',
+					payload: false,
+				});
+			})
+			.catch(err => {
+				return dispatch({
+					type: 'POST_ERROR',
+					payload: true,
+				});
 			});
 	};
 }

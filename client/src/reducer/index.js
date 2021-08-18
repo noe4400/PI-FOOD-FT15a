@@ -10,6 +10,7 @@ const initialState = {
 	serverUp: true,
 	filter: 'ALL',
 	totalResults: 0,
+	postErr: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -93,6 +94,12 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				filter: action.payload,
+			};
+		case 'POST_ERROR':
+			return {
+				...state,
+				postErr: action.payload,
+				isLoading: false,
 			};
 
 		default:

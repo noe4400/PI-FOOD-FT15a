@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import SearchBar from '../SearchBar/SearchBar';
 import './Home.css';
-import { getDietTypes } from '../../actions';
+import { getDietTypes, searchBy } from '../../actions';
 
 const Home = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getDietTypes());
+		dispatch(searchBy());
 	}, []);
 	return (
 		<div className='header-wrapper'>

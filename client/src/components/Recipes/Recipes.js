@@ -30,7 +30,7 @@ const Recipes = () => {
 	}
 	if (filter !== 'ALL') {
 		searchResults = searchResults.filter(result =>
-			result.diets.includes(filter.toLowerCase())
+			result.diets.includes(filter)
 		);
 	}
 

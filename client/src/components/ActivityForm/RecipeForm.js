@@ -2,13 +2,16 @@ import React from 'react';
 import './RecipeForm.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDietTypes, postRecipe } from '../../actions';
+import { getDietTypes, postRecipe, setLoading } from '../../actions';
 
 const RecipeForm = () => {
+	const isLoading = useSelector(state => state.isLoading);
+	const postErr = useSelector(state => state.postErr);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getDietTypes());
 	}, []);
+
 	const [userInput, setInput] = useState({
 		name: '',
 		score: 0,
@@ -16,13 +19,17 @@ const RecipeForm = () => {
 		summary: '',
 		steps: '',
 		dietTypesArray: [],
+		hasBeenSubmitted: false,
 	});
+
 	const [inputValidation, setInputValidation] = useState({
 		isInputNameTouch: false,
 		isSummaryInputTouched: false,
 	});
+
 	const enteredRecipesName = userInput.name.trim() !== '';
 	const enteredSummary = userInput.summary.trim() !== '';
+
 	const recipeNameIsValid =
 		!enteredRecipesName && inputValidation.isInputNameTouch;
 	const summaryIsValid =
@@ -47,9 +54,22 @@ const RecipeForm = () => {
 	if (enteredRecipesName && enteredSummary) {
 		isFormValid = true;
 	}
-	const submitHandler = () => {
-		console.log('submit click');
+	const submitHandler = e => {
+		e.preventDefault();
+		dispatch(setLoading(true));
 		dispatch(postRecipe(userInput));
+		setInput(prevState => {
+			return {
+				...prevState,
+				name: '',
+				score: 0,
+				healthScore: 0,
+				summary: '',
+				steps: '',
+				dietTypesArray: [],
+				hasBeenSubmitted: true,
+			};
+		});
 	};
 
 	const dietTypes = useSelector(state => state.dietTypes);
@@ -126,7 +146,11 @@ const RecipeForm = () => {
 			});
 		}
 	};
-
+	if (isLoading) {
+		return (
+			<h2 className='loading-message'>Creating recipe please wait....</h2>
+		);
+	}
 	const DietOptions = dietTypes.map((e, index) => (
 		<label for={`opt${index}`} className='radio' key={index}>
 			<input
@@ -219,6 +243,16 @@ const RecipeForm = () => {
 					/>
 				</div>
 			</div>
+			{!postErr && userInput.hasBeenSubmitted && (
+				<h2 className='loading-message'>
+					Recipe was created succesfully
+				</h2>
+			)}
+			{postErr && userInput.hasBeenSubmitted && (
+				<h2 className='loading-message'>
+					Unable to create recipe, please try again!
+				</h2>
+			)}
 		</div>
 	);
 };

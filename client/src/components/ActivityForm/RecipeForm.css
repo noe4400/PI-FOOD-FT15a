@@ -72,8 +72,8 @@
 }
 
 .wrapper .form .input-field .btn:disabled,
-.wrapper .form .input-field .btn:hover,
-.wrapper .form .input-field .btn:active {
+.wrapper .form .input-field .btn:disabled:hover,
+.wrapper .form .input-field .btn:disabled:active {
 	background: #ccc;
 	color: rgb(97, 95, 95);
 	cursor: not-allowed;

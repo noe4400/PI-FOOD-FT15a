@@ -51,6 +51,14 @@ function RecipeDetails() {
 						</div>
 					</div>
 				)}
+				{recipeDEtail.score && (
+					<div className='card'>
+						<div className='content'>
+							<h3>Score</h3>
+							<h1>{recipeDEtail.score}</h1>
+						</div>
+					</div>
+				)}
 				{recipeDEtail.healthScore && (
 					<div className='card'>
 						<div className='content'>
@@ -78,8 +86,8 @@ function RecipeDetails() {
 						<div className='content'>
 							<h3>Diet Types</h3>
 							<ul>
-								{recipeDEtail.diets?.map(dish => (
-									<li>{dish}</li>
+								{recipeDEtail.diets?.map(diet => (
+									<li>{diet.name ? diet.name : diet}</li>
 								))}
 							</ul>
 						</div>
