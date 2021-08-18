@@ -20,7 +20,7 @@ describe('Recipe model', () => {
 
 			it('It should throw an error when title is empty', done => {
 				Recipe.create({ summary: 'something here!!' })
-					.then(result => done(new Error('Title must  be empty')))
+					.then(result => done(new Error('Title must not  be empty')))
 					.catch(() => done());
 			});
 
@@ -28,7 +28,9 @@ describe('Recipe model', () => {
 				Recipe.create({
 					title: 'guacamole',
 				})
-					.then(result => done(new Error('Summary must be empty')))
+					.then(result =>
+						done(new Error('Summary must not be empty'))
+					)
 					.catch(() => done());
 			});
 

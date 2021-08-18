@@ -124,34 +124,38 @@ router.get('/types', async (req, res) => {
 router.post('/recipe', async (req, res) => {
 	const { title, summary, score, healthscore, instructions, dietTypes } =
 		req.body;
-
-	const newRecipe = await Recipe.create({
-		title,
-		summary,
-		score,
-		healthscore,
-		instructions,
-	});
-	dietTypes.forEach(async types => {
-		let getDietType = await DietType.findOne({
-			where: {
-				name: types,
-			},
-		});
-		if (!getDietType) {
-			const promisesResult = await Promise.all(createDietTypes());
-		}
-
-		getDietType = await DietType.findOne({
-			where: {
-				name: types,
-			},
+	try {
+		const newRecipe = await Recipe.create({
+			title,
+			summary,
+			score,
+			healthscore,
+			instructions,
 		});
 
-		newRecipe.addDiets(getDietType);
-	});
+		dietTypes.forEach(async types => {
+			let getDietType = await DietType.findOne({
+				where: {
+					name: types,
+				},
+			});
+			if (!getDietType) {
+				const promisesResult = await Promise.all(createDietTypes());
+			}
 
-	res.status(200).send(newRecipe);
+			getDietType = await DietType.findOne({
+				where: {
+					name: types,
+				},
+			});
+
+			newRecipe.addDiets(getDietType);
+		});
+
+		res.status(200).send(newRecipe);
+	} catch (err) {
+		res.status(404).send(err);
+	}
 });
 
 module.exports = router;
