@@ -45,5 +45,24 @@ describe('Recipe model', () => {
 					);
 			});
 		});
+
+		describe('Validates when a recipe is been creeted and already exist one with the same title', () => {
+			before(async () => {
+				const createRecipe = await Recipe.create({
+					title: 'guacamole1',
+					summary: 'something here!!',
+				});
+			});
+			it('It should thown an err when the recipe has been created before with the same title', () => {
+				Recipe.create({
+					title: 'guacamole',
+					summary: 'something here!!',
+				})
+					.then(() => {
+						done(new Error("Recipe's title must be unique"));
+					})
+					.catch(() => done());
+			});
+		});
 	});
 });

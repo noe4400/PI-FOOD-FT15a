@@ -10,16 +10,16 @@ const router = Router();
 
 const createDietTypes = () => {
 	const dietTypesArray = [
-		'Gluten Free',
-		'Ketogenic',
-		'Vegetarian',
-		'Lacto-Vegetarian',
-		'Ovo-Vegetarian',
-		'Vegan',
-		'Pescetarian',
-		'Paleo',
-		'Primal',
-		'Whole30',
+		'gluten free',
+		'ketogenic',
+		'vegetarian',
+		'lacto vegetarian',
+		'ovo vegetarian',
+		'vegan',
+		'pescatarian',
+		'paleo',
+		'primal',
+		'whole 30',
 	];
 
 	const results = dietTypesArray.map(async diet => {
@@ -51,6 +51,7 @@ router.get('/recipes/:id', async (req, res) => {
 				},
 			},
 		});
+
 		if (!getlocalRecipeById) return res.status(404).send('Not found');
 
 		return res.send(getlocalRecipeById);
@@ -67,10 +68,14 @@ router.get('/recipes/:id', async (req, res) => {
 
 router.get('/recipes', async (req, res) => {
 	const { name } = req.query;
-	if (!name) return res.status(404).send('Please enter a valid name');
-	const apiRequest = await axios.get(
-		`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=100&addRecipeInformation=true&apiKey=${API_KEY}`
-	);
+	var url;
+
+	if (name) {
+		url = `https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=100&addRecipeInformation=true&apiKey=${API_KEY}`;
+	} else {
+		url = `https://api.spoonacular.com/recipes/complexSearch?number=100&addRecipeInformation=true&apiKey=${API_KEY}`;
+	}
+	const apiRequest = await axios.get(url);
 	let responseApi = apiRequest.data.results;
 	let filterResponse;
 	if (responseApi.length > 0) {
@@ -85,18 +90,31 @@ router.get('/recipes', async (req, res) => {
 			diets: recipe.diets,
 		}));
 	}
-
-	const getRecipe = await Recipe.findAll({
-		where: { title: { [Op.iLike]: `%${name}%` } },
-		include: {
-			model: DietType,
-			as: 'diets',
-			attributes: ['name'],
-			through: {
-				attributes: [],
+	let getRecipe;
+	if (name) {
+		getRecipe = await Recipe.findAll({
+			where: { title: { [Op.iLike]: `%${name}%` } },
+			include: {
+				model: DietType,
+				as: 'diets',
+				attributes: ['name'],
+				through: {
+					attributes: [],
+				},
 			},
-		},
-	});
+		});
+	} else {
+		getRecipe = await Recipe.findAll({
+			include: {
+				model: DietType,
+				as: 'diets',
+				attributes: ['name'],
+				through: {
+					attributes: [],
+				},
+			},
+		});
+	}
 
 	if (getRecipe.length > 0 && responseApi.length > 0) {
 		filterResponse = [...filterResponse, ...getRecipe];
