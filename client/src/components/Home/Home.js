@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import SearchBar from '../SearchBar/SearchBar';
 import './Home.css';
-import chef from './chef.png';
+import { getDietTypes } from '../../actions';
+
 const Home = () => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getDietTypes());
+	}, []);
 	return (
-		<div>
+		<div className='header-wrapper'>
 			<div className='header-container'>
+				<div className='overlay'></div>
 				<h1>Love cooking?</h1>
 				<SearchBar />
 			</div>

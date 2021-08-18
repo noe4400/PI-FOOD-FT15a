@@ -50,14 +50,7 @@ header .content h1 {
 	word-wrap: normal;
 	line-height: 1.5em;
 }
-.overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-}
+
 .steps {
 	padding: 100px;
 }
@@ -70,4 +63,26 @@ header .content h1 {
 	line-height: 2em;
 	font-size: 1.2em;
 	text-align: justify;
+}
+
+.extra-details {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	background: #f54748;
+	height: 400px;
+}
+.extra-details .card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+	background: #fff;
+	width: 330px;
+	height: 80%;
+	border-radius: 20px;
+}
+.card .content {
+	margin: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 }

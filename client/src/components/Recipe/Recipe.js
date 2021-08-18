@@ -16,7 +16,7 @@ const Recipe = props => {
 					<ul>{types}</ul>
 				</p>
 			</div>
-			<Link class={RecipeCSS.a} to={`/country/${props.id}`}>
+			<Link class={RecipeCSS.a} to={`/recipeDetails/${props.id}`}>
 				More information
 			</Link>
 		</div>
