@@ -1,51 +1,89 @@
-@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
-.navigationBar {
-  padding: 1.1em;
-}
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #343f56;
+  color: var(--black);
+  height: 100px;
+  background: #fff;
+  padding: 0 2rem;
+  box-shadow: var(--box-shadow);
+}
+.rightOptions {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-  font-size: 30px;
-  font-weight: 300;
-  margin: 25px;
-  font-family: "Righteous", cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
-.navLinks ul {
+ul {
   margin: 0;
   padding: 0;
   display: flex;
 }
 
-.navLinks li {
+li {
   list-style: none;
 }
+li a:hover {
+  color: var(--orange);
+}
 
-.navLinks li a {
+li a {
   text-decoration: none;
-  color: #343f56;
+  color: var(--black);
   padding: 1rem;
   display: block;
   font-size: 20px;
-  font-family: "Righteous", cursive;
-  position: relative;
 }
 
-.navLinks li a:after {
-  content: "";
-  width: 0%;
-  height: 10px;
-  position: absolute;
-  left: 10%;
-  top: 40px;
-  background: #f54748;
-  transition: 0.4s;
+.rightDiv {
+  display: flex;
+}
+.buttonIcons {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.1rem;
+  margin-left: 0.5rem;
+}
+.toggleButton {
+  display: none;
 }
 
-.navLinks li a:hover:after {
-  width: 80%;
+@media screen and (max-width: 768px) {
+  .navbar {
+    position: relative;
+  }
+  .navMenu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    top: 100px;
+    left: -100%;
+    position: absolute;
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+  .navMenu.active {
+    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    opacity: 1;
+    z-index: 1;
+    left: 0;
+    transition: all 0.5s ease;
+  }
+  .navLink {
+    text-align: center;
+    padding: 0.8rem;
+  }
+
+  li a:after {
+    content: none;
+  }
+  .toggleButton {
+    display: block;
+  }
 }
