@@ -1,48 +1,51 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+.navigationBar {
+  padding: 1.1em;
+}
 .navbar {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	color: #343f56;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #343f56;
 }
 
 .logo {
-	font-size: 30px;
-	font-weight: 300;
-	margin: 25px;
-	font-family: 'Righteous', cursive;
+  font-size: 30px;
+  font-weight: 300;
+  margin: 25px;
+  font-family: "Righteous", cursive;
 }
 .navLinks ul {
-	margin: 0;
-	padding: 0;
-	display: flex;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
 .navLinks li {
-	list-style: none;
+  list-style: none;
 }
 
 .navLinks li a {
-	text-decoration: none;
-	color: #343f56;
-	padding: 1rem;
-	display: block;
-	font-size: 20px;
-	font-family: 'Righteous', cursive;
-	position: relative;
+  text-decoration: none;
+  color: #343f56;
+  padding: 1rem;
+  display: block;
+  font-size: 20px;
+  font-family: "Righteous", cursive;
+  position: relative;
 }
 
 .navLinks li a:after {
-	content: '';
-	width: 0%;
-	height: 10px;
-	position: absolute;
-	left: 10%;
-	top: 40px;
-	background: #f54748;
-	transition: 0.4s;
+  content: "";
+  width: 0%;
+  height: 10px;
+  position: absolute;
+  left: 10%;
+  top: 40px;
+  background: #f54748;
+  transition: 0.4s;
 }
 
 .navLinks li a:hover:after {
-	width: 80%;
+  width: 80%;
 }

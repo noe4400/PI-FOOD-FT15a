@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert";
 
 export function getDietTypes() {
   return function (dispatch) {
@@ -10,12 +11,12 @@ export function getDietTypes() {
           payload: response.data.map((e) => e.name),
         });
       })
-      .catch((err) =>
+      .catch((err) => {
         dispatch({
           type: "SERVER _ERR",
           payload: err,
-        })
-      );
+        });
+      });
   };
 }
 
@@ -95,6 +96,7 @@ export function postRecipe(obj) {
         dietTypes: obj.dietTypesArray,
       })
       .then((res) => {
+        swal("Great!", "Your recipe was added successffuly!", "success");
         return dispatch({
           type: "POST_ERROR",
           payload: false,
