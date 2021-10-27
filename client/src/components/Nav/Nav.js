@@ -3,13 +3,19 @@ import { Link } from "react-router-dom";
 import navStyles from "./Nav.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faSearch } from "@fortawesome/free-solid-svg-icons";
-
+import SearchBar from "../SearchBar/SearchBar";
 const Nav = () => {
   const [toggle, setToggle] = useState(false);
+  const [activeSearch, setActiveSearch] = useState(false);
 
   const toggleHandler = () => {
     setToggle(!toggle);
   };
+
+  const activeSearchHandler = () => {
+    setActiveSearch(!activeSearch);
+  };
+
   return (
     <nav className={navStyles.navbar}>
       <div className={navStyles.logo}>Food App</div>
@@ -51,9 +57,18 @@ const Nav = () => {
             <FontAwesomeIcon icon={faTimes} />
           </button>
         )}
-        <button className={navStyles.buttonIcons}>
+        <button className={navStyles.buttonIcons} onClick={activeSearchHandler}>
           <FontAwesomeIcon icon={faSearch} />
         </button>
+      </div>
+      <div
+        className={
+          activeSearch
+            ? `${navStyles.SearchBox} ${navStyles.activeSearchBox}`
+            : `${navStyles.SearchBox}`
+        }
+      >
+        <SearchBar />
       </div>
     </nav>
   );

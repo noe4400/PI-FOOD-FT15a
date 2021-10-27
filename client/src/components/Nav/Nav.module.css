@@ -53,6 +53,19 @@ li a {
   display: none;
 }
 
+.SearchBox {
+  top: 110px;
+  right: -100%;
+  position: absolute;
+  transition: all 0.5s ease;
+}
+.SearchBox.activeSearchBox {
+  transition: all 0.5s ease;
+  right: 10px;
+  z-index: 2;
+  transition: all 0.5s ease;
+}
+
 @media screen and (max-width: 768px) {
   .navbar {
     position: relative;
