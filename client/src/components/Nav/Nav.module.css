@@ -1,4 +1,6 @@
 .navbar {
+  width: 100%;
+  min-width: 400px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,16 +56,23 @@ li a {
 }
 
 .SearchBox {
+  padding: 0 1.3rem;
   top: 110px;
-  right: -100%;
+  right: 100%;
+  background-color: #fff;
   position: absolute;
   transition: all 0.5s ease;
+  max-width: 500px;
+  border: solid black 2px;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
 }
 .SearchBox.activeSearchBox {
   transition: all 0.5s ease;
   right: 10px;
   z-index: 2;
   transition: all 0.5s ease;
+  margin: 0 0.5em;
 }
 
 @media screen and (max-width: 768px) {

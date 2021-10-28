@@ -20,7 +20,7 @@ function App() {
       <Route exact path="/home" component={Pagination} />
       <Route exact path="/home" component={Recipes} /> */}
       <Route exact path="/addRecipe" component={RecipeForm} />
-      <Route path="/recipeDetails/:id" component={RecipeDetails} />
+      <Route path="/home/recipeDetails/:id" component={RecipeDetails} />
     </div>
   );
 }

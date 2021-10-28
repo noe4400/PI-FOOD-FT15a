@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Home.css";
 import { getDietTypes, searchBy, setLoading } from "../../actions";
@@ -9,12 +9,15 @@ import Recipes from "../Recipes/Recipes";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const searchResults = useSelector((state) => state.searchResults);
   const isLoading = useSelector((state) => state.isLoading);
+  const [count, setCount] = useState(0);
   useEffect(() => {
     dispatch(setLoading(true));
     dispatch(getDietTypes());
     dispatch(searchBy());
   }, [dispatch]);
+
   if (isLoading) {
     return <Loading />;
   }

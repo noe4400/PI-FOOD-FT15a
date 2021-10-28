@@ -1,25 +1,25 @@
-import React from 'react';
-import RecipeCSS from './Recipe.module.css';
-import { Link } from 'react-router-dom';
-const Recipe = props => {
-	console.log(props);
-	const types = props.diets?.map(type => (
-		<li>{type.name ? type.name : type}</li>
-	));
-	return (
-		<div className={RecipeCSS.card}>
-			<img className={RecipeCSS.img} src={props.img} alt='' />
-			<div className={RecipeCSS.textContainer}>
-				<h3 className={RecipeCSS.h4}>{props.name}</h3>
-				<p>
-					{types.length > 0 && <span>Diets: </span>}
+import React from "react";
+import RecipeCSS from "./Recipe.module.css";
+import { Link } from "react-router-dom";
+const Recipe = (props) => {
+  console.log(props);
+  const types = props.diets?.map((type) => (
+    <li>{type.name ? type.name : type}</li>
+  ));
+  return (
+    <div className={RecipeCSS.card}>
+      <img className={RecipeCSS.img} src={props.img} alt="" />
+      <div className={RecipeCSS.textContainer}>
+        <h3 className={RecipeCSS.h4}>{props.name}</h3>
+        <p>
+          {types.length > 0 && <span>Diets: </span>}
 
-					<ul>{types}</ul>
-				</p>
-			</div>
-			<Link to={`/recipeDetails/${props.id}`}>More information</Link>
-		</div>
-	);
+          <ul>{types}</ul>
+        </p>
+      </div>
+      <Link to={`/home/recipeDetails/${props.id}`}>More information</Link>
+    </div>
+  );
 };
 
 export default Recipe;

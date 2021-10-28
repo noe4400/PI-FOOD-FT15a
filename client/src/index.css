@@ -12,15 +12,15 @@
   --ligth-gray: #eee;
   --box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
 }
-html {
-  overflow-x: hidden;
-}
+
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   font-size: 18px;
   text-decoration: none;
   background-color: var(--light-gray);
+  overflow-x: hidden;
+  width: 100vw;
 }
 a {
   text-decoration: none;
