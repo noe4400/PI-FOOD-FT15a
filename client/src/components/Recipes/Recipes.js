@@ -21,8 +21,6 @@ const Recipes = () => {
     dispatch(orderResults(searchResults, orderBy));
   }, [dispatch, orderBy, searchResults]);
 
-  console.log(indexOfFirstResult, indexOfLastResult);
-
   if (isLoading) {
     return <Loading />;
   }

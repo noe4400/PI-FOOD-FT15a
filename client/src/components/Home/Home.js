@@ -22,14 +22,14 @@ const Home = () => {
     return <Loading />;
   }
   return (
-    <>
+    <div className="home-container">
       <div className="header-wrapper">
         <div className="header-container">{/* <h1>Love cooking?</h1> */}</div>
       </div>
       <FilterBar />
       <Pagination />
       <Recipes />
-    </>
+    </div>
   );
 };
 export default Home;

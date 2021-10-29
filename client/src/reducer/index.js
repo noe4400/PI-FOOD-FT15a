@@ -27,6 +27,7 @@ const reducer = (state = initialState, action) => {
         isLoading: false,
         foundResults: true,
         serverErrors: null,
+        currentPage: 1,
       };
 
     case "CHANGE_LOADING":
